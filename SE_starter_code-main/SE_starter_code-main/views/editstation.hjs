@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Station - Admin Page</title>
+  <link rel="stylesheet" href="styled5.css">
+</head>
+<body>
+  <h1>Edit Station - Admin Page</h1>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+  <script>
+     // Update a station
+     $(document).ready(function(){
+  $("#updateStationForm").submit(function(event) {
+    event.preventDefault();
+
+    var stationId = $("#stationId").val();
+    var stationName = $("#newStationName").val();
+
+    $.ajax({
+      type: "PUT",
+      url: "/api/v1/station/" + stationId,
+      data: JSON.stringify({ stationName: stationName }),
+      contentType: "application/json",
+      success: function(response) {
+        console.log(response);
+        // Handle success
+      },
+      error: function(error) {
+        console.log(error);
+        // Handle error
+      }
+    });
+  });
+ });
+
+      // Delete a station
+  $(document).ready(function(){
+  $("#deleteStationForm").submit(function(event) {
+    event.preventDefault();
+
+    var stationId = $("#deleteStationId").val();
+
+    $.ajax({
+      type: "DELETE",
+      url: "/api/v1/station/" + stationId,
+      success: function(response) {
+        console.log(response);
+        // Handle success
+      },
+      error: function(error) {
+        console.log(error);
+        // Handle error
+      }
+    });
+  });
+     });
+
+  </script>
+
+  <form>
+    <label for="station-name">Station Name:</label>
+    <input type="text" id="station-name" name="station-name" required>
+
+    <label for="station-code">Station Code:</label>
+    <input type="text" id="station-code" name="station-code" required>
+
+    <label for="station-location">Station Location:</label>
+    <input type="text" id="station-location" name="station-location" required>
+
+    <button type="submit">Update Station</button>
+  </form>
+</body>
+</html>

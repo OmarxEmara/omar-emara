@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Purchase Subscriptions</title>
+  <link rel="stylesheet" href="styled4.css">
+</head>
+<body>
+  <h1>Purchase Subscriptions</h1>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+  $("#buySubscriptionForm").submit(function(event) {
+    event.preventDefault();
+
+    var creditCardNumber = $("#creditCardNumber").val();
+    var holderName = $("#holderName").val();
+    var payedAmount = $("#payedAmount").val();
+    var subType = $("#subType").val();
+    var zoneId = $("#zoneId").val();
+
+    $.ajax({
+      type: "POST",
+      url: "/api/v1/payment/subscription",
+      data: {
+        creditCardNumber: creditCardNumber,
+        holderName: holderName,
+        payedAmount: payedAmount,
+        subType: subType,
+        zoneId: zoneId
+      },
+      success: function(response) {
+        console.log(response);
+        // Handle success
+      },
+      error: function(error) {
+        console.log(error);
+        // Handle error
+      }
+    });
+  });
+});
+  </script>
+
+  <form>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="subscription">Choose a Subscription:</label>
+    <select id="subscription" name="subscription" required>
+      <option value="">Select a subscription</option>
+      <option value="monthly">Monthly Subscription</option>
+      <option value="yearly">Yearly Subscription</option>
+      <option value="lifetime">Lifetime Subscription</option>
+    </select>
+
+    <label for="payment">Payment Method:</label>
+    <select id="payment" name="payment" required>
+      <option value="">Select a payment method</option>
+      <option value="credit">Credit Card</option>
+      <option value="paypal">PayPal</option>
+      <option value="bank">Bank Transfer</option>
+    </select>
+
+    <button type="submit">Purchase</button>
+  </form>
+</body>
+</html>
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Refund Request Page</title>
+  <link rel="stylesheet" href="styled5.css">
+</head>
+<body>
+  <h1>Refund Request Page</h1>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+  $("#refundTicketForm").submit(function(event) {
+    event.preventDefault();
+
+    var ticketId = $("#ticketId").val();
+
+    $.ajax({
+      type: "POST",
+      url: "/api/v1/refund/" + ticketId,
+      data: {
+        ticketId: ticketId
+      },
+      success: function(response) {
+        console.log(response);
+        // Handle success
+      },
+      error: function(error) {
+        console.log(error);
+        // Handle error
+      }
+    });
+  });
+});
+  </script>
+
+  <form>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="order-number">Ticket Number:</label>
+    <input type="text" id="order-number" name="order-number" required>
+
+    <label for="reason">Reason for Refund:</label>
+    <textarea id="reason" name="reason" required></textarea>
+
+    <button type="submit">Submit Request</button>
+  </form>
+</body>
+</html>

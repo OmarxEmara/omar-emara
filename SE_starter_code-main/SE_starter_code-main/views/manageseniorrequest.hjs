@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manage Senior Requests - Admin Page</title>
+  <link rel="stylesheet" href="styled5.css">
+</head>
+<body>
+  <h1>Manage Senior Requests - Admin Page</h1>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script> // Update senior request status
+      $(document).ready(function(){
+      
+      $("#updateSeniorRequestForm").submit(function(event) {
+        event.preventDefault();
+    
+        var requestId = $("#seniorRequestId").val();
+        var seniorStatus = $("#seniorStatus").val();
+    
+        $.ajax({
+          type: "PUT",
+          url: "/api/v1/requests/senior/" + requestId,
+          data: JSON.stringify({ seniorStatus: seniorStatus }),
+          contentType: "application/json",
+          success: function(response) {
+            console.log(response);
+            // Handle success
+          },
+          error: function(error) {
+            console.log(error);
+            // Handle error
+          }
+        });
+      });
+      });
+    </script>
+
+  <table>
+    <thead>
+      <tr>
+        <th>User Name</th>
+        <th>Date of Birth</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John Doe</td>
+        <td>1980-05-15</td>
+        <td>
+          <select>
+            <option value="approve">Approve</option>
+            <option value="reject">Reject</option>
+          </select>
+          <button type="submit">Submit</button>
+        </td>
+      </tr>
+      <!-- Add more rows for each senior request -->
+    </tbody>
+  </table>
+</body>
+</html>

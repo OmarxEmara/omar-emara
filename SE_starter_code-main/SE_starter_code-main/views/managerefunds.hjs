@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manage Refunds - Admin Page</title>
+  <link rel="stylesheet" href="styled5.css">
+</head>
+<body>
+  <h1>Manage Refunds - Admin Page</h1>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+  <script>
+      // Update refund request status
+      $(document).ready(function(){
+  $("#updateRefundRequestForm").submit(function(event) {
+    event.preventDefault();
+
+    var requestId = $("#refundRequestId").val();
+    var refundStatus = $("#refundStatus").val();
+
+    $.ajax({
+      type: "PUT",
+      url: "/api/v1/requests/refunds/" + requestId,
+      data: JSON.stringify({ refundStatus: refundStatus }),
+      contentType: "application/json",
+      success: function(response) {
+        console.log(response);
+        // Handle success
+      },
+      error: function(error) {
+        console.log(error);
+        // Handle error
+      }
+    });
+  });
+      });
+
+  </script>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Order Number</th>
+        <th>User Name</th>
+        <th>Reason</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>12345</td>
+        <td>John Doe</td>
+        <td>Defective product</td>
+        <td>
+          <select>
+            <option value="approve">Approve</option>
+            <option value="reject">Reject</option>
+          </select>
+          <button type="submit">Submit</button>
+        </td>
+      </tr>
+      <!-- Add more rows for each refund request -->
+    </tbody>
+  </table>
+</body>
+</html>
