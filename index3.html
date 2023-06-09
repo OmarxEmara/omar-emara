@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('metro4.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-top: 0;
+    }
+
+    h2 {
+      color: #666;
+      margin-top: 30px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    a {
+      color: #999;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Admin Page</h1>
+  
+    <h2>Manage Stations</h2>
+    <ul>
+      <li><a href="/manage/stations/create">Create Station</a></li>
+      <li><a href="/manage/stations/edit/:stationId">Edit Station</a></li>
+    </ul>
+  
+    <h2>Manage Routes</h2>
+    <ul>
+      <li><a href="/manage/routes/create">Create Route</a></li>
+      <li><a href="/manage/routes/edit/:routeId">Edit Route</a></li>
+    </ul>
+  
+    <h2>Manage Requests</h2>
+    <ul>
+      <li><a href="/manage/requests/refunds">Manage Refunds</a></li>
+      <li><a href="/manage/requests/seniors">Manage Senior Requests</a></li>
+    </ul>
+  
+    <h2>Manage Zones</h2>
+    <ul>
+      <li><a href="/manage/zones">Manage Zones</a></li>
+    </ul>
+  </div>
+</body>
+</html>
+
+
