@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Purchase Tickets</title>
+  <link rel="stylesheet" href="styled3.css">
+</head>
+<body>
+  <h1>Purchase Tickets</h1>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+  $("#buyTicketForm").submit(function(event) {
+    event.preventDefault();
+
+    var creditCardNumber = $("#creditCardNumber").val();
+    var holderName = $("#holderName").val();
+    var payedAmount = $("#payedAmount").val();
+    var origin = $("#origin").val();
+    var destination = $("#destination").val();
+    var tripDate = $("#tripDate").val();
+
+    $.ajax({
+      type: "POST",
+      url: "/api/v1/payment/ticket",
+      data: {
+        creditCardNumber: creditCardNumber,
+        holderName: holderName,
+        payedAmount: payedAmount,
+        origin: origin,
+        destination: destination,
+        tripDate: tripDate
+      },
+      success: function(response) {
+        console.log(response);
+        // Handle success
+      },
+      error: function(error) {
+        console.log(error);
+        // Handle error
+      }
+    });
+  });
+});
+
+  $(document).ready(function() {
+  $("#purchaseTicketSubscriptionForm").submit(function(event) {
+    event.preventDefault();
+
+    var subId = $("#subId").val();
+    var origin = $("#origin").val();
+    var destination = $("#destination").val();
+    var tripDate = $("#tripDate").val();
+
+    $.ajax({
+      type: "PUT",
+      url: "/api/v1/tickets/purchase/subscription",
+      data: {
+        subId: subId,
+        origin: origin,
+        destination: destination,
+        tripDate: tripDate
+      },
+      success: function(response) {
+        console.log(response);
+        // Handle success
+      },
+      error: function(error) {
+        console.log(error);
+        // Handle error
+      }
+    });
+  });
+});
+  </script>
+
+  <form>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" required>
+
+    <label for="payment">Payment Method:</label>
+    <select id="payment" name="payment" required>
+      <option value="">Select a payment method</option>
+      <option value="credit">Credit Card</option>
+      <option value="paypal">PayPal</option>
+      <option value="bank">Bank Transfer</option>
+    </select>
+
+    <button type="submit">Purchase</button>
+  </form>
+</body>
+</html>

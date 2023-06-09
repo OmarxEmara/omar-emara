@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Station - Admin Page</title>
+  <link rel="stylesheet" href="styled5.css">
+</head>
+<body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>$(document).ready(function() {
+    // Create a new station
+    $("#createStationForm").submit(function(event) {
+      event.preventDefault();
+  
+      var stationName = $("#stationName").val();
+  
+      $.ajax({
+        type: "POST",
+        url: "/api/v1/station",
+        data: JSON.stringify({ stationName: stationName }),
+        contentType: "application/json",
+        success: function(response) {
+          console.log(response);
+          // Handle success
+        },
+        error: function(error) {
+          console.log(error);
+          // Handle error
+        }
+      });
+  });
+});
+  </script>
+
+  
+  <h1>Create Station - Admin Page</h1>
+
+  <form>
+    <label for="station-name">Station Name:</label>
+    <input type="text" id="station-name" name="station-name" required>
+
+    <label for="station-code">Station Code:</label>
+    <input type="text" id="station-code" name="station-code" required>
+
+    <label for="station-location">Station Location:</label>
+    <input type="text" id="station-location" name="station-location" required>
+
+    <button type="submit">Create Station</button>
+  </form>
+</body>
+</html>

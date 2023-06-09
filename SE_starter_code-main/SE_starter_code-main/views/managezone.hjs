@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manage Zones - Admin Page</title>
+  <link rel="stylesheet" href="styled5.css">
+</head>
+<body>
+  <h1>Manage Zones - Admin Page</h1>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+  <script>
+      // Update zone price
+  $(document).ready(function(){
+  $("#updateZoneForm").submit(function(event) {
+    event.preventDefault();
+
+    var zoneId = $("#zoneId").val();
+    var price = $("#zonePrice").val();
+
+    $.ajax({
+      type: "PUT",
+      url: "/api/v1/zones/" + zoneId,
+      data: JSON.stringify({ price: price }),
+      contentType: "application/json",
+      success: function(response) {
+        console.log(response);
+        // Handle success
+      },
+      error: function(error) {
+        console.log(error);
+        // Handle error
+      }
+    });
+  });
+  });
+  </script>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Zone Name</th>
+        <th>Zone Code</th>
+        <th>Zone Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Zone A</td>
+        <td>A</td>
+        <td>This is Zone A</td>
+        <td>
+          <button>Edit</button>
+          <button>Delete</button>
+        </td>
+      </tr>
+      <!-- Add more rows for each zone -->
+    </tbody>
+  </table>
+</body>
+</html>

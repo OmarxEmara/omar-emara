@@ -1,0 +1,53 @@
+body {
+    background-image: url("metrologo.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  section {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    margin-top: 0;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  a {
+    color: blue;
+    text-decoration: none;
+  }
+  
+  button,
+  a {
+    margin-top: 10px;
+  }
+  
+  button:hover,
+  a:hover {
+    opacity: 0.8;
+  }
+  

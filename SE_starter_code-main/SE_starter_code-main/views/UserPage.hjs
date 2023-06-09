@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Page</title>
+  <link rel="stylesheet" href="styled2.css">
+</head>
+<body>
+  <h1>Welcome to Your User Page</h1>
+
+  <nav>
+    <ul>
+      <li><a href="purchasesubscription">Subscriptions</a></li>
+      <li><a href="purchase-tickets">Tickets</a></li>
+      <li><a href="prices">Prices</a></li>
+      <li><a href="rides">Rides</a></li>
+      <li><a href="requests/refund">Refund Requests</a></li>
+      <li><a href="requests/senior">Senior Requests</a></li>
+    </ul>
+  </nav>
+
+  <!-- Content Area -->
+  <div id="content">
+    <!-- Content will be dynamically loaded here based on the selected menu option -->
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+  $("#simulateRideForm").submit(function(event) {
+    event.preventDefault();
+
+    var origin = $("#origin").val();
+    var destination = $("#destination").val();
+    var tripdate = $("#tripdate").val();
+    var userid = $("#userid").val();
+    var ticketid = $("#ticketid").val();
+
+    $.ajax({
+      type: "PUT",
+      url: "/api/v1/ride/simulate",
+      data: {
+        origin: origin,
+        destination: destination,
+        tripdate: tripdate,
+        userid: userid,
+        ticketid: ticketid
+      },
+      success: function(response) {
+        console.log(response);
+        // Handle success
+      },
+      error: function(error) {
+        console.log(error);
+        // Handle error
+      }
+    });
+  });
+});
+  </script>
+  <script>
+    // Add an event listener to the navigation links
+    var navLinks = document.querySelectorAll('nav ul li a');
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default link behavior
+        var pageUrl = this.getAttribute('href'); // Get the page URL
+        loadContent(pageUrl); // Load the content based on the URL
+      });
+    });
+
+    // Function to load content dynamically
+    function loadContent(url) {
+      var contentDiv = document.getElementById('content');
+      contentDiv.innerHTML = '<p>Loading...</p>'; // Show a loading message
+
+      // Simulate a redirect to the appropriate URLs
+      setTimeout(function() {
+        if (url === 'Subscriptions') {
+          window.location.href = 'purchasesubscription.html';
+        } else if (url === 'purchase-tickets') {
+          window.location.href = 'purchase-tickets.html';
+        } else {
+          contentDiv.innerHTML = '<h2>' + url + '</h2>';
+        }
+      }, 1000); // Delayed for 1 second for demonstration purposes
+    }
+  </script>
+</body>
+</html>
+
+
